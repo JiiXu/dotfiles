@@ -15,6 +15,7 @@ vim.opt.incsearch = true
 
 -- Indentation, folding and styling
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.foldmethod = "syntax"
 
@@ -28,3 +29,7 @@ vim.opt.updatetime = 100
 
 -- Autocompletion
 vim.opt.completeopt="menu,menuone,noselect,noinsert"
+
+-- Whitespace
+vim.opt.listchars = {eol = '↵',trail='·',extends='◣',precedes='◢',nbsp='○',tab='>-'}
+vim.opt.list = true

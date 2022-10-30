@@ -7,7 +7,7 @@ end
 local luasnip = require("luasnip")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- The following example advertise capabilities to `clangd`.
 require'lspconfig'.clangd.setup {
@@ -15,6 +15,9 @@ require'lspconfig'.clangd.setup {
 }
 
 cmp.setup({
+  completion = {
+--    keyword_length = 10
+  },
   view = {
     entries = "custom"
   },
@@ -28,13 +31,13 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     -- documentation = cmp.config.window.bordered(),
   },
-  mapping = cmp.mapping.preset.insert({
+  mapping = {
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-o>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<Tab>'] = function(fallback)
+    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-j>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -43,7 +46,7 @@ cmp.setup({
                 fallback()
             end
         end,
-        ['<S-Tab>'] = function(fallback)
+        ['<C-k>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -52,7 +55,7 @@ cmp.setup({
                 fallback()
             end
         end,
-  }),
+  },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' }, -- For luasnip users.
@@ -91,7 +94,7 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require'lspconfig'.clangd.setup {
   capabilities = capabilities

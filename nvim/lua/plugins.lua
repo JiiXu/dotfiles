@@ -1,6 +1,7 @@
 require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use 'nanotee/sqls.nvim'
   use 'p00f/clangd_extensions.nvim'
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-abolish'
