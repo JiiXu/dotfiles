@@ -14,7 +14,7 @@ require'bufferline'.setup {
   -- Enables/disable clickable tabs
   --  - left-click: go to buffer
   --  - middle-click: delete buffer
-  clickable = false,
+  clickable = true,
 
   -- Excludes buffers from the tabline
   exclude_ft = {'javascript'},
@@ -60,7 +60,7 @@ require'bufferline'.setup {
   -- for other layouts.
   letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
 
-  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+  -- Sets the name of unnamed buffers. By default format is '[Buffer X]'
   -- where X is the buffer number. But only a static string is accepted here.
   no_name_title = nil,
 }
