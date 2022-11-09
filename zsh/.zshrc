@@ -5,8 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Configure f*ck
+eval $(thefuck --alias)
+
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 path+=/home/jiku/.local/bin
 path+=/var/lib/snapd/snap/bin
 path+=$HOME/scripts
@@ -35,7 +37,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -82,10 +84,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    wd
     ssh-agent
+    zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -108,11 +111,6 @@ export EDITOR=$(which nvim)
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 
-# Alias ls and tree for exa
-alias ls='exa --color=auto'
-alias lsa='exa -lah'
-alias tree='exa -T --ignore-glob="paru"'
-
 alias diff='colordiff'
 
 # git aliases
@@ -120,22 +118,39 @@ alias gs='git status'
 alias ga='git add'
 alias gm='git commit -m'
 alias gp='git push'
-
+rgf() {
+  rg --files | rg $1
+}
+# AWS CLI
+alias awsapde='aws --profile apde'
 
 # Git diff with bat
-batdiff() {
+giff() {
 	git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
 
-# diff files with git-so-fancy
+# diff files with diff-so-fancy
 fiff() {
 	diff -u $1 $2 | diff-so-fancy
 }
 
+# Quick setup for working on projects (not working)
+workon() {
+  i3-msg workspace 2; exec "/usr/bin/kitty $1"
+  i3-msg workspace 3; exec kitty -e nvim $1
+}
+
+# Efficienter make
 alias make='make -j10'
 alias remake='make clean && make -j10'
 
+# Neovim is vim
 alias vim='nvim'
+alias vi='nvim'
+
+# Linux version of OSX pbcopy and pbpaste.
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -154,3 +169,13 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 # Auto suggestions
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source $ZSH/oh-my-zsh.sh
+# Alias ls and tree for exa
+alias ls=exa
+alias lsa='exa -lah'
+alias tree='exa -T --ignore-glob="paru"'
+alias tasks='nb tasks open'
+
+nb tasks open
+[ -f "/home/jiku/.ghcup/env" ] && source "/home/jiku/.ghcup/env" # ghcup-env
