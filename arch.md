@@ -15,7 +15,6 @@ I set up three partitions, /dev/nvme0n1p{1,2,3} of 100MB, 1GB and 998.9GB respec
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkfs.ext2 /dev/nvme0n1p2
 mkfs.ext4 /dev/nvme0n1p3
-
 ```
 ## Mount the filesystems
 ```
@@ -24,7 +23,6 @@ mkdir /mnt/boot
 mount /dev/nvme0n1p2 /mnt/boot
 mkdir /mnt/boot/efi
 mount /dev/nvme0n1p1 /mnt/boot/efi
-
 ```
 # Bootstrap Arch Linux
 ```
