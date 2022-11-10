@@ -194,6 +194,14 @@ When=PostTransaction
 NeedsTargets
 Exec=/bin/sh -c  'grep -q "^linux$" || mkinitcpio -P'
 ```
+# === Neovim ===
+`nvim-packer-git` has probably already been installed. Just run nvim, ignore
+the error messages and once in nvim do
+```
+:PackerSync
+```
+Restart nvim.
+
 # === Korean ===
 
 ## Install Ibus
