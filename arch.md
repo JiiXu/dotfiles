@@ -145,7 +145,7 @@ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 ## Install everything through paru
 ```
 mkdir -p ~/repos
-git clone https://github.com/JiiXu/dotfiles.git ~/repos
+git clone https://github.com/JiiXu/dotfiles.git ~/repos/dotfiles
 paru -S --needed < ~/repos/dotfiles/pkglist.txt
 ```
 

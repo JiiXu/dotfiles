@@ -209,6 +209,11 @@ _G.packer_plugins = {
     path = "/home/jiku/.local/share/nvim/site/pack/packer/start/vim-abolish",
     url = "https://github.com/tpope/vim-abolish"
   },
+  ["vim-clang-format"] = {
+    loaded = true,
+    path = "/home/jiku/.local/share/nvim/site/pack/packer/start/vim-clang-format",
+    url = "https://github.com/rhysd/vim-clang-format"
+  },
   ["vim-gitgutter"] = {
     loaded = true,
     path = "/home/jiku/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
