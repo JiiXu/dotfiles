@@ -28,7 +28,7 @@ mount /dev/nvme0n1p1 /mnt/boot/efi
 ```
 # Bootstrap Arch Linux
 ```
-pacstrap /mnt base base-devel grub-efi-x86_64 efibootmgr zsh vim git dialog net-tools sudo networkmanager ipw2200-fw linux linux-firmware
+pacstrap /mnt base base-devel grub-efi-x86_64 efibootmgr zsh vim git dialog net-tools networkmanager ipw2200-fw linux linux-firmware
 ```
 
 ## Generate fstab
@@ -118,7 +118,7 @@ reboot
 
 # Set up pacman
 ```
-sudo pacman-key --init
+pacman-key --init
 ```
 ## Activate parallel downloads and reshuffle mirrors
 ```
@@ -128,8 +128,9 @@ vim /etc/pacman.d/mirrorlist
 pacman -Syyu
 ```
 # Set up X11
-sudo pacman -S xorg xorg-server xorg-apps xorg-xinit xterm xorg-fonts-100dpi xorg-fonts-75dpi autorandr
-
+```
+pacman -S xorg xorg-server xorg-apps xorg-xinit xterm xorg-fonts-100dpi xorg-fonts-75dpi autorandr
+```
 # Set up environment
 
 ## Install paru
@@ -152,8 +153,8 @@ paru -S --needed < ~/repos/dotfiles/pkglist.txt
 # Set up Nvidia
 
 ## blacklist nouveau
-sudo echo 'blacklist nouveau' >> /etc/modprobe.d/blacklist.conf
-sudo pacman -S nvidia nvidia-utils
+echo 'blacklist nouveau' >> /etc/modprobe.d/blacklist.conf
+pacman -S nvidia nvidia-utils
 
 ## Add gxf card to xorg server
 ```
