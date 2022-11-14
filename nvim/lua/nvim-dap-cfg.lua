@@ -49,7 +49,6 @@ end
 local function configure_debuggers()
 --  require('config.dap.lua').setup()
   require('dap-python-cfg').setup()
-  -- cpptools currently not working
   require('dap-cpptools-cfg').setup()
 end
 

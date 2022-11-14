@@ -53,14 +53,14 @@ require('packer').startup(function(use)
    -- Note that the setup is run here, as it requires a returned
    -- dict of some sort - I'm not 100% sure how to integrate this
    -- with the setup scheme I've used for other plugins.
-  use 'williamboman/mason.nvim'
+--  use 'williamboman/mason.nvim'
   use 'theHamsta/nvim-dap-virtual-text'
   use 'rcarriga/nvim-dap-ui'
   use 'mfussenegger/nvim-dap-python'
   use 'nvim-telescope/telescope-dap.nvim'
   use 'folke/which-key.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'WhoIsSethDaniel/mason-tool-installer.nvim'
+--  use 'williamboman/mason-lspconfig.nvim'
+--  use 'WhoIsSethDaniel/mason-tool-installer.nvim'
   use {
     'mfussenegger/nvim-dap',
     opt = true,
@@ -71,9 +71,9 @@ require('packer').startup(function(use)
       'nvim-dap-ui', 
       'nvim-dap-python', 
       'which-key.nvim',
-      'mason.nvim',
-      'mason-lspconfig.nvim',
-      'mason-tool-installer.nvim'
+ --     'mason.nvim',
+ --     'mason-lspconfig.nvim',
+--      'mason-tool-installer.nvim'
     },
     requires = {
       'theHamsta/nvim-dap-virtual-text',
@@ -81,14 +81,11 @@ require('packer').startup(function(use)
       'mfussenegger/nvim-dap-python',
       'nvim-telescope/telescope-dap.nvim',
       'folke/which-key.nvim',
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
+--      'williamboman/mason.nvim',
+--      'williamboman/mason-lspconfig.nvim',
+--      'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'jbyuki/one-small-step-for-vimkind', module = 'osv' },
     },
-    config = function()
-      require('nvim-dap-cfg').setup()
-    end,
   }
 
   -- ...what a nightmare. Now onto something more fun; nvim-cmp is an autocompletion tool!

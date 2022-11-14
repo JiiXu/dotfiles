@@ -1,3 +1,4 @@
+local util = require 'lspconfig/util'
 
 -- define a function to be run each time neovim attaches an LSP
 local custom_attach = function(client, bufnr)
@@ -23,39 +24,36 @@ local custom_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rf', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>=', function() vim.lsp.buf.format { async = true } end, bufopts)
 
-  -- Functionality to highlight the symbol under the cursor
-  vim.cmd [[
-    hi! LspReferenceRead cterm=bold ctermbg=235 guibg=Purple
-    hi! LspReferenceText cterm=bold ctermbg=235 guibg=Purple
-    hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=Purple
-  ]]
-  vim.api.nvim_create_augroup('lsp_document_highlight', {})
-  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-    group = 'lsp_document_highlight',
-    buffer = 0,
-    callback = vim.lsp.buf.document_highlight,
-  })
-  vim.api.nvim_create_autocmd('CursorMoved', {
-    group = 'lsp_document_highlight',
-    buffer = 0,
-    callback = vim.lsp.buf.clear_references,
-  })
 end
-
--- list of installed language servers
-local servers = { 'pyright', 'clangd' }
-
 -- set require statement as local variable
 -- (basically an alias)
 local nvim_lsp = require( 'lspconfig' )
 
--- run setup for each listed language server
-for _, lsp in ipairs( servers ) do
-  nvim_lsp[lsp].setup {
-    on_attach = custom_attach,
-    root_dir = nvim_lsp.util.root_pattern('foo', 'bar', 'baz')
-  }
-end
+-- clangd
+nvim_lsp.clangd.setup {
+  on_attach = custom_attach,
+  filetypes = { 'c', 'cpp', 'h' },
+  root_dir = util.root_pattern(
+          '.clangd',
+          '.clang-tidy',
+          '.clang-format',
+          'compile_commands.json',
+          'compile_flags.txt',
+          'configure.ac',
+          '.git'
+  ),
+}
+-- pyright
+nvim_lsp.pyright.setup {
+  on_attach = custom_attach,
+  filetypes = { 'python' },
+}
+-- LHS
+nvim_lsp.hls.setup {
+  cmd = { 'haskell-language-server-wrapper', '--lsp' },
+  on_attach = custom_attach,
+  filetypes = { 'haskell', 'lhaskell' }
+}
 
 -- Mappings which are always set
 -- I feel like <space> as a modifier is pretty unique to LSP so I

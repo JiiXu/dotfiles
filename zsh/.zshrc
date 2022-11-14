@@ -134,6 +134,12 @@ fiff() {
 	diff -u $1 $2 | diff-so-fancy
 }
 
+# compile nasm x86_64
+nasm64 () {
+  nasm -f elf64 -g -F dwarf ${1}.asm -o ${1}.o && ld ${1}.o -o ${1} && rm ${1}.o
+}
+
+
 # Quick setup for working on projects (not working)
 workon() {
   i3-msg workspace 2; exec "/usr/bin/kitty $1"
@@ -177,5 +183,8 @@ alias lsa='exa -lah'
 alias tree='exa -T --ignore-glob="paru"'
 alias tasks='nb tasks open'
 
+rm -r ~/Desktop 2&> /dev/null
+
 nb tasks open
+
 [ -f "/home/jiku/.ghcup/env" ] && source "/home/jiku/.ghcup/env" # ghcup-env

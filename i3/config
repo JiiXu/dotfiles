@@ -57,7 +57,8 @@ font pango:monospace 8
 # Start guake
 exec_always --no-startup-id guake
 
-# Start polybar
+# Start bar
+#exec --no-startup-id tint2
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Dunst
